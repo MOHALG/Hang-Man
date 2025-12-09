@@ -1,0 +1,9 @@
+#dashes-container{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.dashes{
+    font-size: 40px;
+}
