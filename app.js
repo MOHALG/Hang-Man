@@ -53,10 +53,14 @@ function checkLetterInWord(event) {
 
   for (let i = 0; i < splitWord.length; i++) {
     if (splitWord[i] === clickedLetter) {
+emptyWord[i] = clickedLetter
+dashesContainerElement.children[i].textContent = clickedLetter
       console.log("hey"); // runs only when letters match
     }
   }
 }
+
+
 
 
 
