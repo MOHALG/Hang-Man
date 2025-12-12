@@ -2,7 +2,8 @@ const touchBoard= ""
 let pickedWord
 let lives = 6
 let splitWord
-let emptyWord = []
+let touchedKey = ""
+let currentWordIndex;
 
 
 const keys = [
@@ -43,9 +44,39 @@ function pickRandomWord(){
 
 
 pickRandomWord()
-function checkLetterInWord(event){
+// in thee functtion below teh main purpose is,
+// to check if the picked letter is matching
+// the randolmy pciked looped letter in the word
+function checkLetterInWord(event) {
+  const clickedLetter = event.target.textContent.toLowerCase();
+  console.log(clickedLetter);
 
+  for (let i = 0; i < splitWord.length; i++) {
+    if (splitWord[i] === clickedLetter) {
+      console.log("hey"); // runs only when letters match
+    }
+  }
 }
+
+
+
+
+
+
+
+//   currentWordIndex = val;
+
+
+//     if(splitWord.includes(currentWordIndex)){
+//     console.log("hey")
+
+// }
+
+  
+
+// if (words[currentWordIndex].includes(touchedKey.toLowerCase())){
+//     console.log("Hey");
+
 
 
 
@@ -89,7 +120,7 @@ function eraseContent (){
 
 touchBoard1.forEach(letter => {
   letter.addEventListener('click', (event) => {
-    console.log(event.target.textContent)
+    console.log(event.target.textContent.toLowerCase())
     checkLetterInWord(event)
     const pressedLetter = letter.textContent; 
     output.textContent += pressedLetter;
