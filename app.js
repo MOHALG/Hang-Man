@@ -51,13 +51,22 @@ function checkLetterInWord(event) {
   const clickedLetter = event.target.textContent.toLowerCase();
   console.log(clickedLetter);
 
-  for (let i = 0; i < splitWord.length; i++) {
-    if (splitWord[i] === clickedLetter) {
-emptyWord[i] = clickedLetter
-dashesContainerElement.children[i].textContent = clickedLetter
-      console.log("hey"); // runs only when letters match
-    }
+let matchFound = false;
+
+for (let i = 0; i < splitWord.length; i++) {
+  if (splitWord[i] === clickedLetter) {
+    dashesContainerElement.children[i].textContent = clickedLetter;
+    matchFound = true;
   }
+}
+
+if (!matchFound) {
+  lives--;
+  console.log("Lives left: " + lives);
+  if (lives === 0) {
+    console.log("Game Over! The word was: " + pickedWord);
+  }
+}
 }
 
 
