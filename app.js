@@ -143,3 +143,7 @@ touchBoard1.forEach(letter => {
   });
 });
 
+erase.addEventListener('click', () => {
+  output.textContent = '';
+  location.reload();
+});
