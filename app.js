@@ -55,6 +55,7 @@ let matchFound = false;
 
 for (let i = 0; i < splitWord.length; i++) {
   if (splitWord[i] === clickedLetter) {
+    emptyWord[i] = clickedLetter;
     dashesContainerElement.children[i].textContent = clickedLetter;
     matchFound = true;
   }
@@ -67,8 +68,12 @@ if (!matchFound) {
     console.log("Game Over! The word was: " + pickedWord);
   }
 }
-}
 
+// Check if all letters are revealed (no more underscores)
+if (!emptyWord.includes('_')) {
+  console.log("You Won!");
+}
+}
 
 
 
@@ -100,10 +105,8 @@ const touchBoard1 = document.querySelectorAll('.letter')
 const output = document.getElementById('output');
 const erase = document.getElementById('reset')
 const dashesContainerElement = document.querySelector('#dashes-container')
-
-
-
-
+const gameWinner = document.getElementById('.winner')
+const losingGame = document.getElementById('.loser')
 
 
 /*-------------------------------- Functions --------------------------------*/
