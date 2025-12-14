@@ -6,6 +6,7 @@ let touchedKey = ""
 let currentWordIndex;
 
 
+
 const keys = [
   "Q","W","E","R","T","Y","U","I","O","P",
   "A","S","D","F","G","H","J","K","L",
@@ -58,22 +59,36 @@ for (let i = 0; i < splitWord.length; i++) {
     emptyWord[i] = clickedLetter;
     dashesContainerElement.children[i].textContent = clickedLetter;
     matchFound = true;
+    // break;
   }
 }
 
 if (!matchFound) {
   lives--;
+  hangmanImageElement.src = `./images/hangman${lives}.png`
   console.log("Lives left: " + lives);
+
   if (lives === 0) {
+    messageElement.textContent = "Game Over! The word was: " + pickedWord;
     console.log("Game Over! The word was: " + pickedWord);
+    stopGame();
   }
 }
+event.target.disabled = true;
 
 // Check if all letters are revealed (no more underscores)
-if (!emptyWord.includes('_')) {
+for (let i = 0; i < emptyWord.length; i++) {
+  if (!emptyWord.includes('_')) {
   console.log("You Won!");
+  messageElement.textContent = "Congratulations! You win. the word is: " + pickedWord;
+  stopGame();
+  break;
+  }
+
 }
 }
+
+
 
 
 
@@ -107,6 +122,8 @@ const erase = document.getElementById('reset')
 const dashesContainerElement = document.querySelector('#dashes-container')
 const gameWinner = document.getElementById('.winner')
 const losingGame = document.getElementById('.loser')
+const messageElement = document.getElementById('message')
+const hangmanImageElement = document.getElementById('hangman-pic')
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -114,7 +131,13 @@ const losingGame = document.getElementById('.loser')
 // function myFunction(){
 //    console.log(letter)
 //  }
-
+function stopGame(){
+  if (lives === 0 || !emptyWord.includes('_')){
+    touchBoard1.forEach((letter)=>{ 
+      letter.disabled = true
+    })
+  }
+}
 
 splitWord.forEach((letter)=>{
   const newElement = document.createElement('p')
@@ -123,12 +146,6 @@ splitWord.forEach((letter)=>{
   dashesContainerElement.appendChild(newElement)
   
 })
-
-
-
-function eraseContent (){
-
-}
 
 /*-------------------------------- Event lsitener --------------------------------*/
 
@@ -143,7 +160,7 @@ touchBoard1.forEach(letter => {
   });
 });
 
-erase.addEventListener('click', () => {
+erase.addEventListener('click', () => {// reset function
   output.textContent = '';
   location.reload();
 });
